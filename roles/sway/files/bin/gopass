@@ -1,0 +1,7 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+/usr/bin/gopass ls --flat |\
+    /usr/bin/bemenu $BEMENU_PARAMS -p 'gopass:' |\
+    /usr/bin/xargs --no-run-if-empty /usr/bin/gopass show -c

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+case "$branch" in
+    "master") echo "You can't commit directly to master branch" && exit 1 ;;
+    "main") echo "You can't commit directly to main branch" && exit 1 ;;
+esac

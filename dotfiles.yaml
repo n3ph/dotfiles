@@ -1,0 +1,13 @@
+---
+
+- name: "Dotfiles"
+  hosts: localhost
+  connection: local
+  become_method: su
+  roles:
+    - {role: aur, tags: aur}
+    - {role: repos, tags: repos}
+    - {role: shell, tags: shell}
+    - {role: git, tags: git}
+    - {role: ssh, tags: ssh}
+    - {role: sway, tags: sway}

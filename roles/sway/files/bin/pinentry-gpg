@@ -1,0 +1,5 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+/usr/bin/pinentry-bemenu $BEMENU_PARAMS

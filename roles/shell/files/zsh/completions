@@ -1,0 +1,5 @@
+#fpath=(~/.zsh/functions $fpath);
+#autoload -Uz $fpath[1]/*(.:t)
+fpath=(~/.zsh/completions $fpath);
+autoload -Uz compinit
+compinit -u

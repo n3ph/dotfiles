@@ -1,0 +1,14 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+choice=$(echo -e 'lock\nsuspend\nhibernate\nreboot\nshutdown' |\
+    /usr/bin/bemenu $BEMENU_PARAMS -p 'init:')
+
+case $choice in
+    "lock") ~/.config/sway/bin/lock ;;
+    "suspend") systemctl suspend ;;
+    "hibernate") systemctl hibernate ;;
+    "reboot") systemctl reboot ;;
+    "shutdown") systemctl poweroff ;;
+esac

@@ -1,0 +1,8 @@
+---
+
+- name: build aur packages
+  include_tasks: build.yaml
+  loop: "{{ aur_packages }}"
+  loop_control:
+    loop_var: aur_package
+    

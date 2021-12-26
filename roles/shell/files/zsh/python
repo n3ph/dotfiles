@@ -1,0 +1,2 @@
+# disable Python Byte Code
+export PYTHONDONTWRITEBYTECODE=1

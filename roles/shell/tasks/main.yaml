@@ -1,0 +1,6 @@
+---
+
+- ansible.builtin.include_tasks: "{{ item }}.yaml"
+  loop:
+    - packages
+    - config

@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+if swaymsg -t get_outputs -r | jq -e '.[] | select(.name=="eDP-1") | .active' ; then {
+    swaymsg output eDP-1 disable
+} else {
+    swaymsg output eDP-1 enable
+}
+fi

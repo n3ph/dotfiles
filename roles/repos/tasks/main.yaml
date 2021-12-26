@@ -1,0 +1,17 @@
+---
+
+- name: ensure directories
+  ansible.builtin.file:
+    dest: "{{ repo_dir }}/{{ repo.path | default('') }}"
+    state: directory
+  loop: "{{ git_repos }}"
+  loop_control:
+    loop_var: repo
+
+- name: checkout git
+  ansible.builtin.git:
+    repo: "{{ repo.src }}"
+    dest: "{{ repo_dir }}/{{ repo.path | default('') }}/{{ repo.name }}"
+  loop: "{{ git_repos }}"
+  loop_control:
+    loop_var: repo

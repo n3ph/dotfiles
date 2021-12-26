@@ -1,0 +1,55 @@
+---
+
+- set_fact:
+    aur_package: "{{ aur_package }}"
+
+- name: "{{ aur_package }} | checkout"
+  ansible.builtin.git:
+    repo: "https://aur.archlinux.org/{{ aur_package }}.git"
+    dest: "{{ build_dir }}/{{ aur_package }}"
+    force: true
+  register: git
+
+- when: git.changed
+  block:
+
+  - name: "{{ aur_package }} | cleanup git"
+    ansible.builtin.command: git clean --force
+    args:
+      chdir: "{{ build_dir }}/{{ aur_package }}"
+
+  - name: "{{ aur_package }} | lookup old artifacts"
+    ansible.builtin.find:
+      paths: "{{ build_dir }}/{{ aur_package }}"
+      patterns: '*.pkg.tar.zst'
+    register: find
+
+  - name: "{{ aur_package }} | remove old artifacts"
+    ansible.builtin.command: "rm -f {{ find_aur_package.path }}"
+    args:
+      chdir: "{{ build_dir }}/{{ aur_package }}"
+    loop_control:
+      loop_var: find_aur_package
+      label: "{{ find_aur_package.path }}"
+    loop: "{{ find.files }}"
+
+  - name: "{{ aur_package }} | build"
+    ansible.builtin.command: makepkg --clean --cleanbuild --force --syncdeps
+    args:
+      chdir: "{{ build_dir }}/{{ aur_package }}"
+
+  - name: "{{ aur_package }} | lookup"
+    ansible.builtin.find:
+      paths: "{{ build_dir }}/{{ aur_package }}"
+      patterns: '*.pkg.tar.zst'
+    register: find
+
+  - name: "{{ aur_package }} | install"
+    become: true
+    community.general.pacman:
+      name: "{{ find_aur_package.path }}"
+      state: latest
+    loop_control:
+      loop_var: find_aur_package
+      label: "{{ find_aur_package.path }}"
+    loop: "{{ find.files }}"

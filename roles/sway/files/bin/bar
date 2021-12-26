@@ -1,0 +1,106 @@
+#! /usr/bin/env python3
+
+from datetime import datetime
+from dbus import Interface, SystemBus
+from os import getloadavg, environ
+from psutil import sensors_temperatures
+from subprocess import check_output 
+from sys import stdout 
+
+environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+from pygame import mixer
+
+
+# Todo: 🎧
+def get_audio_stats():
+    try:
+        mute = (check_output(
+            "pactl get-sink-mute $(pactl get-default-sink) | awk -F 'Mute: ' '{print $2}'",
+            shell=True
+        ).strip().decode("utf-8"))
+    except Exception:
+        mute = None
+
+    try:
+        volume_level = int(check_output(
+            "pactl get-sink-volume $(pactl get-default-sink) | awk -F '/' '{print $2}' | xargs | sed 's/%//'",
+            shell=True
+        ).strip().decode("utf-8"))
+    except Exception:
+        return 'err'
+
+    if volume_level >= 70:
+        volume_icon = "🔊"
+    elif volume_level >= 30 and volume_level < 70:
+        volume_icon = "🔉"
+    elif volume_level < 30 and volume_level >= 1:
+        volume_icon = "🔈"
+    else:
+        volume_icon = "🔇"
+
+    if mute == "yes":
+        volume_icon = "🔇"
+
+    return f'{volume_icon} {volume_level}%'
+
+
+def get_battery_stats():
+    upower_name = "org.freedesktop.UPower"
+    upower_path = "/org/freedesktop/UPower"
+    dbus_properties = "org.freedesktop.DBus.Properties"
+    dbus = SystemBus()
+    upower_proxy = dbus.get_object(upower_name, upower_path)
+    upower_interface = Interface(upower_proxy, upower_name)
+    devices = upower_interface.EnumerateDevices()
+    for device in devices:
+        if 'BAT' in device:
+            battery_proxy = dbus.get_object(upower_name, device)
+            battery_proxy_interface = Interface(battery_proxy, dbus_properties)
+            percentage = int(battery_proxy_interface.Get(upower_name + ".Device", "Percentage"))
+            state = int(battery_proxy_interface.Get(upower_name + ".Device", "State"))
+            break
+
+    if percentage < 5 and state != 1:
+        mixer.init()
+        sound = mixer.Sound('/usr/share/sounds/freedesktop/stereo/complete.oga')
+        sound.play()
+
+    if percentage < 30:
+        battery_icon = '🪫'
+    else:
+        battery_icon = '🔋'
+
+    if (state == 0): # unknown
+        battery_icon = '❓'
+    elif (state == 1): # charging
+        battery_icon = '🔌' + battery_icon
+    elif (state == 2): # discharging
+        battery_icon = battery_icon
+    elif (state == 3): # empty
+        battery_icon = '💔'
+    elif (state == 4): # fully charged
+        battery_icon = '🔌'
+
+    return f'{battery_icon} {percentage}%'
+
+
+def get_cpu_temp():
+    dell_smm = sensors_temperatures()["dell_smm"]
+
+    for sensor in dell_smm:
+        if sensor.label == "CPU":
+            return f'🌡️ {sensor.current}°C'
+
+
+def get_load():
+    load1, load5, load15 = getloadavg()
+
+    return f'{load1} {load5} {load15}'
+
+
+def main():
+    stdout.write("%s\n" % f'{get_load()} ❘ {get_cpu_temp()} ❘ {get_battery_stats()} ❘ {get_audio_stats()} ❘ {datetime.now().strftime("%d.%m.%Y %H:%M:%S")} ❘')
+    stdout.flush()
+
+
+main()

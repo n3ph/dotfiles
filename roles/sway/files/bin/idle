@@ -1,0 +1,13 @@
+#! /usr/bin/env sh
+
+if ! pgrep swayidle; then
+    swayidle -w \
+        before-sleep '~/.config/sway/bin/lock' \
+        timeout 240 '/usr/bin/notify-send --expire-time 5000 "locking in 60 seconds"' \
+        timeout 270 '/usr/bin/notify-send --expire-time 5000 "locking in 30 seconds"' \
+        timeout 290 '/usr/bin/notify-send --expire-time 5000 "locking in 10 seconds"' \
+        timeout 300 '~/.config/sway/bin/lock' \
+        timeout 360 'swaymsg "output * dpms off"' \
+        timeout 60 'if pgrep -x swaylock; then swaymsg "output * dpms off"; fi' \
+        resume 'swaymsg "output * dpms on"' &
+fi

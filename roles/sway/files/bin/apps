@@ -1,0 +1,8 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+export PATH=$HOME/.bin:$PATH
+
+/usr/bin/bemenu-run $BEMENU_PARAMS -p 'run:' |\
+    /usr/bin/xargs swaymsg exec --

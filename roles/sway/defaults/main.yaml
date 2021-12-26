@@ -1,0 +1,56 @@
+---
+
+packages:
+  - alacritty
+  - bemenu
+  - brightnessctl
+  - imagemagick
+  - grim
+  - jq
+  - nerd-fonts-complete
+  - noto-fonts-emoji
+  - pinentry-bemenu
+  - pipewire
+  - pipewire-alsa
+  - pipewire-pulse
+  - python-psutil
+  - python-pygame
+  - slurp
+  - sway
+  - swayidle
+  - ttf-dejavu
+  - ttf-fira-code
+  - ttf-fira-mono
+  - ttf-linux-libertine
+  - upower
+  - wl-clipboard
+
+aur_packages:
+  - clipman
+  - nerd-fonts-complete
+  - swaylock-effects
+  - wdisplays
+  - wev
+
+files:
+  - {src: bin/apps, dest: ~/.config/sway/bin/apps}
+  - {src: bin/bar, dest: ~/.config/sway/bin/bar}
+  - {src: bin/bemenu, dest: ~/.config/sway/bin/bemenu}
+  - {src: bin/dpms, dest: ~/.config/sway/bin/dpms}
+  - {src: bin/gopass, dest: ~/.config/sway/bin/gopass}
+  - {src: bin/idle, dest: ~/.config/sway/bin/idle}
+  - {src: bin/lock, dest: ~/.config/sway/bin/lock}
+  - {src: bin/lock-toggle, dest: ~/.config/sway/bin/lock-toggle}
+  - {src: bin/pinentry-gpg, dest: ~/.config/sway/bin/pinentry-gpg}
+  - {src: bin/pinentry-ssh, dest: ~/.config/sway/bin/pinentry-ssh}
+  - {src: bin/slurpshot, dest: ~/.config/sway/bin/slurpshot}
+  - {src: bin/state, dest: ~/.config/sway/bin/state}
+
+  - {src: config.d/autostart, dest: ~/.config/sway/config.d/autostart}
+  - {src: config.d/bar, dest: ~/.config/sway/config.d/bar}
+  - {src: config.d/bindsym, dest: ~/.config/sway/config.d/bindsym}
+  - {src: config.d/common, dest: ~/.config/sway/config.d/common}
+  - {src: config.d/input, dest: ~/.config/sway/config.d/input}
+  - {src: config.d/output, dest: ~/.config/sway/config.d/output}
+
+  - {src: alacritty.yml, dest: ~/.config/alacritty/alacritty.yml}

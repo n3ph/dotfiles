@@ -1,0 +1,6 @@
+# env vars
+export EDITOR=nano
+export PATH=~/.bin:$PATH
+
+# don't clobber files
+set -o noclobber
