@@ -12,8 +12,9 @@ files:
   - {src: zshrc, dest: ~/.zshrc}
   - {src: zsh/aliases, dest: ~/.zsh/aliases}
   - {src: zsh/common, dest: ~/.zsh/common}
-  - {src: zsh/keychain, dest: ~/.zsh/keychain}
+  - {src: zsh/completions, dest: ~/.zsh/completions}
   - {src: zsh/keybinds, dest: ~/.zsh/keybinds}
+  - {src: zsh/keychain, dest: ~/.zsh/keychain}
   - {src: zsh/history, dest: ~/.zsh/history}
   - {src: zsh/go, dest: ~/.zsh/go}
   - {src: zsh/python, dest: ~/.zsh/python}

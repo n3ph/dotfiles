@@ -1,8 +1,4 @@
-# use vim input mode
-set -o vi
-bindkey -v
-
-# commnadline movement
+# commandline movement
 bindkey "^[[1;5D" backward-word  # Ctrl + left
 bindkey "^[[1;5C" forward-word  # Ctrl + right
 bindkey "^[[1" beginning-of-line  # Fn + left
