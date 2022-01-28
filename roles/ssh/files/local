@@ -6,3 +6,11 @@ Host 192.168.1.1
 
 Host 192.168.2.1
   StrictHostKeyChecking no
+
+Host 10.23.42.1
+    PubkeyAcceptedAlgorithms +ssh-rsa
+    HostkeyAlgorithms +ssh-rsa
+
+Host 10.23.42.211
+    PubkeyAcceptedAlgorithms +ssh-rsa
+    HostkeyAlgorithms +ssh-rsa
