@@ -63,7 +63,5 @@
 	wsErrorHighlight = all
 [init]
 	defaultBranch = main
-[branch "master"]
-    mergeoptions = --no-ff
-[branch "main"]
-    mergeoptions = --no-ff
+[push]
+	default = current
