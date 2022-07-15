@@ -1,0 +1,19 @@
+---
+
+- name: ensure directories
+  ansible.builtin.file:
+    dest: "{{ file.dest | dirname }}"
+    state: directory
+  loop: "{{ files }}"
+  loop_control:
+    loop_var: file
+
+- name: link config files
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/{{ file.src }}"
+    dest: "{{ file.dest }}"
+    state: link
+    force: true
+  loop: "{{ files }}"
+  loop_control:
+    loop_var: file

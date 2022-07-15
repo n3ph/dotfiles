@@ -1,0 +1,5 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+echo | /usr/bin/bemenu $BEMENU_PARAMS -p "$1" -x

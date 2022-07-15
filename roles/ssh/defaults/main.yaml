@@ -1,0 +1,8 @@
+---
+
+packages:
+  - openssh
+
+files:
+  - {src: common, dest: ~/.ssh/config.d/common}
+  - {src: local, dest: ~/.ssh/config.d/local}

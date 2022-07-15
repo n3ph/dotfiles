@@ -1,0 +1,6 @@
+---
+
+repo_dir: ~/repos
+
+git_repos:
+  - {name: dotfiles, src: git@github.com:n3ph/dotfiles.git}

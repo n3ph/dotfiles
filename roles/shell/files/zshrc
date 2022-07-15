@@ -1,0 +1,14 @@
+# source shell additionals
+source ~/.zsh/aliases
+source ~/.zsh/common
+source ~/.zsh/completions
+source ~/.zsh/history
+source ~/.zsh/keybinds
+source ~/.zsh/keychain
+
+# source languages
+source ~/.zsh/go
+source ~/.zsh/python
+
+# source starship
+source ~/.zsh/starship

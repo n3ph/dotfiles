@@ -1,0 +1,4 @@
+exec nm-applet --indicator
+exec blueman-applet
+exec wl-paste -t text --watch clipman store --no-persist
+exec ~/.config/sway/bin/idle

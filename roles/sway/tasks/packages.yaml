@@ -1,0 +1,10 @@
+---
+
+- name: install packages
+  become: true
+  ansible.builtin.package:
+    name: "{{ package }}"
+    state: latest
+  loop: "{{ packages }}"
+  loop_control:
+    loop_var: package

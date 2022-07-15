@@ -1,0 +1,9 @@
+#! /usr/bin/env sh
+
+if pgrep swayidle; then
+    pkill swayidle
+    notify-send --expire-time 1000 "autolock disabled"
+else
+    ~/.config/sway/bin/idle
+    notify-send --expire-time 1000 "autolock enabled"
+fi

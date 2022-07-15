@@ -1,0 +1,3 @@
+export SSH_ASKPASS="$HOME/.config/sway/bin/pinentry-ssh"
+export SSH_ASKPASS_REQUIRE=prefer
+eval $(keychain --agents gpg,ssh --eval --noask --quiet id_ed25519 D7781BF44C35C0FB0E86E677520DF07814B030DF)

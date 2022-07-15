@@ -1,0 +1,11 @@
+# commandline movement
+bindkey "^[[1;5D" backward-word  # Ctrl + left
+bindkey "^[[1;5C" forward-word  # Ctrl + right
+bindkey "^[[1" beginning-of-line  # Fn + left
+bindkey "^[[H" beginning-of-line  # Fn + left in tmux
+bindkey "^[[4" end-of-line  # Fn + right
+bindkey "^[[F" end-of-line  # Fn + right in tmux
+bindkey "^[[3~" delete-char  # Delete
+bindkey '^H' backward-kill-word  # Ctrl + Backspace
+bindkey '5~' delete-word  # Ctrl + Delete
+bindkey "^[[3;5~" delete-word  # Ctrl + Delete in tmux

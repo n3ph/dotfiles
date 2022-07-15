@@ -1,0 +1,17 @@
+#! /usr/bin/env sh
+
+source $HOME/.config/sway/bin/bemenu
+
+shotpath=$HOME/images/screenshots
+test -d "${shotpath}" || mkdir -p "${shotpath}"
+
+choice=$(echo -e "focus\nfullscreen\nselection" |\
+    /usr/bin/bemenu -p 'slurpshot:' ${BEMENU_PARAMS})
+filename="${shotpath}/screenshot-$(date +'%Y-%m-%d-%H%M%S.png')"
+focus=$(/usr/bin/swaymsg -t get_tree | /usr/bin/jq '.. | (.nodes? // empty)[] | select(.focused and .pid) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+
+case $choice in
+    "focus") /usr/bin/grim -g "$(eval echo $focus)" "${filename}" ;;
+    "fullscreen") /usr/bin/grim "${filename}" ;;
+    "selection") /usr/bin/grim -g "$(slurp)" "${filename}" ;;
+esac

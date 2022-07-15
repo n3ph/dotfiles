@@ -1,0 +1,45 @@
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[cmd_duration]
+min_time = 500
+
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+style = "bold cyan"
+disabled = false
+
+[git_branch]
+symbol = "🌱 "
+style = "bold purple"
+disabled = false
+
+[git_state]
+cherry_pick = "CHERRY PICKING"
+rebase = "REBASING"
+merge = "MERGING"
+revert = "REVERTING"
+bisect = "BISECTING"
+am = "AM"
+am_or_rebase = "AM/REBASE"
+style = "bold yellow"
+disabled = false
+
+[jobs]
+symbol = "+ "
+threshold = 1
+
+[python]
+symbol = "🐍 "
+pyenv_version_name = true
+pyenv_prefix = "pyenv"
+style = "bold yellow"
+disabled = false
+
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true

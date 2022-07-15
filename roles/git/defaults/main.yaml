@@ -1,0 +1,10 @@
+---
+
+packages:
+  - git
+  - git-crypt
+
+files:
+  - {src: gitconfig, dest: ~/.gitconfig}
+  - {src: gitignore, dest: ~/.gitignore}
+  - {src: hooks/pre-commit, dest: ~/.githooks/pre-commit}

@@ -1,0 +1,17 @@
+---
+
+- name: copy ansible_user_id
+  ansible.builtin.set_fact:
+    local_user: "{{ ansible_user_id }}"
+    
+- name: copy systemd service unit file
+  become: true
+  ansible.builtin.template:
+    src: "{{ role_path }}/files/systemd.service.tpl"
+    dest: /etc/systemd/system/sway@.service
+
+- name: copy pam file
+  become: true
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/pam"
+    dest: /etc/pam.d/sway

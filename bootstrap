@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+
+# error and exit
+err() {
+    echo "${1}"
+    exit 1
+}
+
+# exec
+command -v ansible-playbook > /dev/null || err 'ansible-playbook exec not found!'
+ansible-playbook --ask-become-pass $(dirname "${0}")/dotfiles.yaml "${@}"

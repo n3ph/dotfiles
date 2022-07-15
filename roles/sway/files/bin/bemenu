@@ -1,0 +1,3 @@
+#! /usr/bin/env sh
+
+export BEMENU_PARAMS='-H 23 --hf #5396CD --tf #5396CD'

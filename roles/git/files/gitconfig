@@ -1,0 +1,67 @@
+[user]
+	name = Michael Gerlach
+	email = n3ph@cccfr.de
+	signingkey = D7781BF44C35C0FB0E86E677520DF07814B030DF
+[core]
+	excludesfile = ~/.gitignore
+	hooksPath = ~/.githooks
+[commit]
+	gpgsign = true
+[alias]
+	a = add
+	ap = add --patch
+	ci = commit --signoff --message
+	co = checkout
+	d = diff
+	ds = diff --staged
+	gl = config --global --list
+	last = log HEAD --stat -1
+	ll = log --oneline
+	p = push
+	rb = "!f() { \
+		echo fetching...; \
+		/usr/bin/git fetch; \
+		if [ $? -eq 0 ]; then \
+			last_status=$(/usr/bin/git status --untracked-files=no --porcelain); \
+			if [ \"${last_status}\" != \"\" ]; then \
+				echo stashing local changes...; \
+				/usr/bin/git stash; \
+			else \
+				echo nothing to stash...; \
+			fi;\
+			if [ $? -eq 0 ]; then \
+				echo rebasing...;\
+				/usr/bin/git rebase;\
+				if [ $? -eq 0 ]; then \
+					if [ \"${last_status}\" != \"\" ]; then\
+						echo applying stashed changes...;\
+						/usr/bin/git stash pop;\
+						if [ $? -ne 0 ]; then \
+						echo STASH POP FAIL - you will need to resolve merge conflicts with git mergetool; \
+						fi; \
+					fi; \
+				else \
+					echo REBASE FAILED - you will need to manually run stash pop; \
+				fi;\
+			fi;\
+		fi; \
+		if [ $? -ne 0 ]; then \
+			echo ERROR: Operation failed; \
+		fi; \
+	}; f"
+	rst = "!f() {\
+		/usr/bin/git checkout main || /usr/bin/git checkout master; \
+		/usr/bin/git pull; \
+	}; f"
+	rv = remote -v
+	st = status
+	uncommit = reset --soft HEAD~
+	unstage = reset --
+[help]
+	autocorrect = 20
+[diff]
+	wsErrorHighlight = all
+[init]
+	defaultBranch = main
+[push]
+	default = current
